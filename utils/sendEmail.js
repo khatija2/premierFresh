@@ -1,40 +1,38 @@
 const nodemailer = require("nodemailer");
-const {google} = require("googleapis");
+//const {google} = require("googleapis");
 
 
-const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
+//const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
 
 /*try {
 	var config = require('../config');
 } catch(e) {
 	console.log("not local");
 	console.log(e);
-};*/
+};
 
 
 
 const oAuth2Client = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, REDIRECT_URI);
-oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN});
+oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN});*/
 
 
 		
 		const sendEmail = async (email, subject, text, data) => {
     try {
-		const accessToken = await oAuth2Client.getAccessToken()
+		//const accessToken = await oAuth2Client.getAccessToken()
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: 'mail.premierfresh.co.za',
+			port: 993,
+			secure: true,
 			auth: {
-				type: 'OAuth2',
 				user: process.env.EMAIL,
-				clientId: process.env.CLIENT_ID,
-				clientSecret: process.env.CLIENT_SECRET,
-				refreshToken: process.env.REFRESH_TOKEN,
-				accessToken: accessToken
+				pass: process.env.PASS
             },
         });
 
         await transporter.sendMail({
-            from:  process.env.EMAIL,
+            from: process.env.EMAIL,
             to: email,
             subject: subject,
             text: text,
