@@ -1,0 +1,23 @@
+<%- include("partials/header") %>
+ <div class="pastproduct_page">
+        <h2>Order 000<%= inv.orderId %></h2>
+        <table class="pastproduct-table">
+            <tr>
+                <thead>
+                <th>Product Name</th>
+                <th>Product Code</th>
+                <th>Quantity</th>
+                </thead>
+            <tr>
+                <tbody>
+				<% orderList.forEach((order) => { %>
+				<tr>
+                <td><%= order.productName %></td>
+                <td><%= order.id %></td>
+                <td><%= order.amount %></td>
+				</tr>
+				<% }) %>
+               </tbody>
+        </table>
+    </div>
+<%- include("partials/footer") %>

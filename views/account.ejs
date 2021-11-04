@@ -1,0 +1,12 @@
+<%- include("partials/header") %>
+ <div class="general_page">
+     <h2>My Account</h2>
+     <div class="general-box">
+		 <p><strong>Username:</strong><%= user.username %></p>
+		 <p><strong>Email:</strong><%= user.email %></p><button onclick="document.location='/newEmail'" class="change-e">Change Email</button>
+		 <br>
+		 <br>
+		 <button onclick="document.location='/newPassword'" class="change-e">Change Password</button>
+     </div>
+ </div>
+<%- include("partials/footer") %>

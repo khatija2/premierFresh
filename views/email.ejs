@@ -1,0 +1,39 @@
+<%- include("partials/header") %>
+<div class="email-form">
+<div class="login_form">
+		<form  action="/newEmail/<%=user._id%>?_method=PUT" method="POST" id="change-email">
+			 <h3>Change Email Address</h3>
+			<div class="mb-3">
+ 				<input type="email" class="form-control" id="email" name="email" placeholder="New Email Address">
+			</div>
+			<div class="mb-3">
+ 				<input type="email" class="form-control" id="email2" name="email2" placeholder="Retype Email Address">
+			</div>
+            <button type="button" class="form_button" id="email_button">Submit</button>
+        </form>
+		<div id="email-match"></div>
+		<div class="form-cont">
+		<% if (errorMessage && errorMessage.length > 0) { %>
+		<div class="alert-danger">
+		<%= errorMessage %>
+  		<span class="alertbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+		</div>
+		<% } %>
+		</div>
+    	</div>
+</div>
+	<script>
+		document.querySelector("#email_button").addEventListener('click', () => {
+	if (document.querySelector("#email").value === document.querySelector("#email2").value) {
+		 document.querySelector("#change-email").submit();
+	} else {
+		document.querySelector("#email-match").innerHTML = `<div class="form-cont">
+	<div class="alert-danger">
+	Emails Do Not Match!
+  	<span class="alertbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	</div>
+	</div>`;
+	}	
+	})
+	</script>
+<%- include("partials/footer") %>

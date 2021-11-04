@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Orders</title>
+</head>
+<body class="admin">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: white">
+        <div class="container-fluid">
+          <a class="navbar-brand ms-0.5" id="brandName">Premier Fresh Produce Admin</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/admin/productList" id="home-link">Item List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/admin/users" id="home-link">Users</a>
+             </li>
+             <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/admin/orders" id="home-link">Orders</a>
+             </li>
+			<li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/admin/dailyOrders" id="home-link">Daily Orders</a>
+             </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= user.username %>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="/admin/myAccount">My account</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+<div class="past_orders">
+	<div>
+	<div id="message-cont">
+	<% if (errorMessage && errorMessage.length > 0) { %>
+	<div class="alert-danger">
+	<%= errorMessage %>
+  	<span class="alertbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	</div>
+	<% } %>
+	</div>
+        <h2>Past Orders</h2>
+		   <form class="form-inline" action="/admin/orders/search" method="GET">
+    			<input class="form-control mr-sm-2" name="term" id="myInput"  type="search" placeholder="Search Customer..." aria-label="Search">
+    			<button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+  			</form>
+	    <button data-bs-toggle="modal" data-bs-target="#myOrdersModal" id="orders-btn" alt="delete orders">Delete Orders</button>
+		</div>
+        <table class="order-table">
+            <tr>
+                <thead>
+                <th>Order Number</th>
+				<th>Customer</th>
+                <th>Number of Items</th>
+                <th>Order Date</th>
+                </thead>
+			</tr>
+                <tbody>
+				<% orders.forEach((order) => { %>
+				<tr>
+                <td><a href="/admin/order/<%=order._id%>">000<%= order.orderId %></a></td>
+				<td><%= order.owner.username %></td>
+                <td><%= order.bag %></td>
+                <td><%= order.updated.toISOString().split('T')[0] %></td>
+            	</tr>
+				<% }) %>
+               </tbody>
+        </table>
+    </div>
+	<form action="/admin/orders/delete?_method=DELETE" method="POST">
+        <div class="modal" id="myOrdersModal" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Delete Orders</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  By clicking "Proceed", you will permanently delete orders older than 60 days old!
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Proceed</button>
+              </div>
+            </div>
+          </div>
+        </div>
+	</form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>  
+</body>
+</html>

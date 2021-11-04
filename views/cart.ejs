@@ -1,0 +1,69 @@
+<%- include("partials/header") %>
+<div class="cart-heading">
+    <h2>My Cart</h2>
+	<div id="message-cont">
+	<% if (successMessage && successMessage.length > 0) { %>
+	<div class="alert-success">
+	<%= successMessage %>
+  	<span class="alertbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	</div>
+	<% } %>
+	<% if (errorMessage && errorMessage.length > 0) { %>
+	<div class="alert-danger">
+	<%= errorMessage %>
+  	<span class="alertbtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	</div>
+	<% } %>
+	</div>
+</div>
+<div class="cart-page">
+ <div class="cart-order">
+    <h6>You have <span id="itemno">0</span> items in your cart</h6>
+    <div>
+    <button id="submit-button"  data-bs-toggle="modal" data-bs-target="#mySubmitModal">Submit Order</button>
+    <button id="clear-button" data-bs-toggle="modal" data-bs-target="#myClearModal">Clear Cart</button>
+    </div>
+ </div>
+ <div class="list_container" id="cart-container">
+ </div>
+</div>
+<div class="modal" id="myClearModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Clear Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure that you want to clear your cart?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="yesClear">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<form name="submitForm" id="submitForm"  action="/myCart" method="POST">
+<div class="modal" id="mySubmitModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Submit Order</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure that you want to submit your order?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			<input type="hidden" id="nm"  name="order" value=""> 
+			<input type="hidden" id="bag"  name="bag" value=""> 
+          <button type="button" form="orderForm" class="btn btn-primary" id="yesSubmit">Yes</button>
+        </div>
+      </div>
+    </div>
+ </div>
+</form>
+<script src="/javascript/cartScript.js"></script>
+<%- include("partials/footer") %>

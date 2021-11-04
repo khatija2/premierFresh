@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/premie62/public_html/
+    - /premierFresh/cp -R premierFresh $DEPLOYPATH

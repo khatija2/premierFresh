@@ -1,0 +1,36 @@
+<%- include("partials/header") %>
+<div class="page_lay">
+ <div class="product_page">
+      <h2>Products</h2>
+      <form class="form-inline" action="/products/search" method="GET">
+    			<input class="form-control mr-sm-2" name="term" id="myInput"  type="search" placeholder="Search..." aria-label="Search">
+    			<button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+  	  </form>
+ </div>
+    <div class="list_container">
+		 <% items.forEach((item) => { %>
+      <div class="grid-container">
+        <div class="grid-column1">
+          <div class="grid-item1" id="product">
+                <h3 id="product_name"><%= item.product_name %></h3>
+                <h6 id="product_code"><%= item.code %></h6>
+          </div>
+        </div>
+        <div class="grid-column2">
+          <div class="grid-item2">
+            <h5>Quantity</h5>
+          </div>
+          <div class="grid-item3">
+            <input type="number" id="quantity" name="quantity" min="0" max="1000" style="text-align: center;">
+          </div>
+          <div class="grid-item4">
+                <button class="add-btn">Add to Cart</button>
+                <button id="trash-btn" class="trash-btn" disabled><i class="bi bi-trash"></i></button>
+          </div>
+        </div>
+      </div>
+	 <% }) %>
+    </div>
+</div>
+<script src="/javascript/script.js"></script>
+<%- include("partials/footer") %>

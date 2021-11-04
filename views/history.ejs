@@ -1,0 +1,23 @@
+<%- include("partials/header") %>
+<div class="past_orders">
+        <h2>Past Orders</h2>
+        <table class="order-table">
+            <tr>
+                <thead>
+                <th>Order Number</th>
+                <th>Number of Items</th>
+                <th>Order Date</th>
+                </thead>
+			</tr>
+                <tbody>
+				<% ownerOrder.forEach((order) => { %>
+				<tr>
+                <td><a href="/order/<%=order._id%>">000<%= order.orderId %></a></td>
+                <td><%= order.bag %></td>
+                <td><%= order.updated.toISOString().split('T')[0] %></td>
+            	</tr>
+				<% }) %>
+               </tbody>
+        </table>
+    </div>
+<%- include("partials/footer") %>
