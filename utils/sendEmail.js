@@ -28,8 +28,8 @@ oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN});*/
 			logger: true,
 			secure: true,
 			auth: {
-				user: 'admin@premierfresh.co.za',
-				pass: 'Produce$2021'
+				user: process.env.EMAIL,
+				pass: process.env.PASS
             },
 			tls: {
     		rejectUnauthorized: false,
@@ -37,7 +37,7 @@ oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN});*/
         });
 
         await transporter.sendMail({
-            from: 'admin@premierfresh.co.za',
+            from: process.env.EMAIL,
             to: email,
             subject: subject,
             text: text,
