@@ -52,7 +52,9 @@ try {
 	
 	const data = await ejs.renderFile("views/test.ejs", {orders});
 	
-	sendEmail(req.user.email, 'Your Premier Fresh Produce Order', "Log in to your account to view your Order", data)	
+	const email = [req.user.email, process.env.PF_MAIL]
+	
+	sendEmail(email, 'Your Premier Fresh Produce Order', "Log in to your account to view your Order", data)	
 
 	req.flash("success", "Order Submitted!");
 	res.redirect("/myCart")
