@@ -29,6 +29,9 @@ oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN});*/
 				user: process.env.EMAIL,
 				pass: process.env.PASS
             },
+			tls: {
+    		rejectUnauthorized: false,
+  			},
         });
 
         await transporter.sendMail({
