@@ -22,7 +22,7 @@ oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN});*/
     try {
 		//const accessToken = await oAuth2Client.getAccessToken()
         const transporter = nodemailer.createTransport({
-            host: 'mail.premierfresh.co.za',
+            host: 'nl1-ss24.a2hosting.com',
 			port: 465,
 			secure: true,
 			auth: {
