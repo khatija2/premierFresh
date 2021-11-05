@@ -24,6 +24,8 @@ oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN});*/
         const transporter = nodemailer.createTransport({
             host: 'nl1-ss24.a2hosting.com',
 			port: 465,
+			debug: true,
+			logger: true,
 			secure: true,
 			auth: {
 				user: process.env.EMAIL,
