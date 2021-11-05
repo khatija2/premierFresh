@@ -29,7 +29,10 @@ router.get("/logout", (req, res) => {
 router.get("/productList",  checkAdmin, async (req, res) => {
 	try {
 		const items = await Item.find().sort({ product_name: 1 });
-		res.render("productList", {items});
+		const maxCode = await Item.find().sort({code: -1}).limit(1)
+		const addCode = parseInt(maxCode[0].code) + 1
+		const newCode = addCode.toString()
+		res.render("productList", {items, newCode});
 	} catch (err) {
 		console.log(err);
 		res.redirect('back')
@@ -38,7 +41,7 @@ router.get("/productList",  checkAdmin, async (req, res) => {
 
 //post route
 router.post("/productList", checkAdmin, async (req, res) => {
-const item = {
+	const item = {
 		product_name: req.body.product_name,
 		code: req.body.code,
 		stock: req.body.stock
