@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 //const {google} = require("googleapis");
-var smtpTransport = require('nodemailer-smtp-transport');
+//var smtpTransport = require('nodemailer-smtp-transport');
 
 
 //const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
@@ -21,8 +21,8 @@ oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN});*/
 		const sendEmail = async (email, subject, text, data) => {
     try {
 		//const accessToken = await oAuth2Client.getAccessToken()
-        const transporter = nodemailer.createTransport(smtpTransport({
-            host: 'nl1-ss24.a2hosting.com',
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.nl1-ss24.a2hosting.com',
 			port: 465,
 			debug: true,
 			logger: true,
@@ -34,7 +34,7 @@ oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN});*/
 			tls: {
     		rejectUnauthorized: false,
   			},
-        }));
+        });
 
         await transporter.sendMail({
             from: process.env.EMAIL,
