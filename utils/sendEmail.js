@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+require('dotenv').config({ path: './.env' });
 //const {google} = require("googleapis");
 //var smtpTransport = require('nodemailer-smtp-transport');
 
