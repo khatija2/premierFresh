@@ -58,12 +58,15 @@ try {
 //search route
 router.get("/productList/search", checkAdmin, async (req, res) => {
 	try {
+		const maxCode = await Item.find().sort({code: -1}).limit(1)
+		const addCode = parseInt(maxCode[0].code) + 1
+		const newCode = addCode.toString()
 		const items = await Item.find({
 			$text: {
 				$search: req.query.term
 			}
 		})
-		res.render("productList", {items})
+		res.render("productList", {items, newCode})
 	} catch (err) {
 		console.log(err);
 		res.redirect("/admin/productList")
