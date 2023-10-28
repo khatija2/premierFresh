@@ -8,12 +8,12 @@ const sendEmail = require('../utils/sendEmail');
 const Token = require("../models/token");
 const crypto = require("crypto");
 
-/*try {
+try {
 	var config = require('../config');
 } catch(e) {
 	console.log("not local");
 	console.log(e);
-};*/
+};
 
 
 router.get("/", (req, res) => {
@@ -43,7 +43,7 @@ try {
                 token: crypto.randomBytes(32).toString("hex"),
             	}).save();
         		}
-				const link = `${process.env.BASE_URL}/${confirm[0]._id}/${token.token}`;
+				const link = `${config.gmail.BASE_URL}/${confirm[0]._id}/${token.token}`;
         		await sendEmail(req.body.email, "Password reset",`Click on the following link to change your password: ${link}` 				);
 				req.flash("success", "Password link sent to your email expires in 1 hour!")
 				res.redirect("/")

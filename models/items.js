@@ -4,6 +4,7 @@ const itemsSchema = new mongoose.Schema({
 	product_name: String,
 	code: Number,
 	stock: String,
+	in_stock: Number
 });
 
 
