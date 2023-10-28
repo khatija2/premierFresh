@@ -15,6 +15,7 @@
     "method-override": "^3.0.0",
     "mongoose": "^5.13.21",
     "n": "^9.2.0",
+    "node": "^16.20.1",
     "node-fetch": "^3.3.2",
     "nodemailer": "^6.7.0",
     "nodemon": "^2.0.13",
