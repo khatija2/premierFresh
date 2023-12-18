@@ -59,7 +59,7 @@ const Token = require('./models/token');
 
 //express session config
 app.use(expressSession({
-		secret: process.env.ES_SECRET || config.expressSession.secret,
+		secret: process.env.ES_SECRET|| config.expressSession.secret,
 		resave: false,
 		saveUninitialized: false
 		}));
